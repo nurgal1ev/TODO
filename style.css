@@ -114,3 +114,7 @@ input:focus {
 .done {
     text-decoration: line-through;
 }
+
+.check {
+    pointer-events: none;
+}

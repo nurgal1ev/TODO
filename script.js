@@ -12,7 +12,7 @@ addInput.addEventListener('submit', function (event) {
                         <h2 class="task-name">${taskInput}</h2>
                         <div class="buttons">
                             <button class="input-button" id="buttonDone"><img src="icons/Check-green.svg" alt="" srcset=""></button>
-                            <button class="input-button delete" data-action="delete" id="buttonDelete"><img src="icons/delete.svg" alt="" srcset=""></button>
+                            <button class="input-button delete" data-action="delete" id="buttonDelete"><img class="check" src="icons/delete.svg" alt="" srcset=""></button>
                         </div>
                     </div>`;
     
@@ -23,6 +23,9 @@ addInput.addEventListener('submit', function (event) {
 })
 
 taskContainer.addEventListener('click', function (event) {
-    console.log(event.currentTarget);
-    
+    if (event.target.dataset.action == 'delete') {
+        const parentElement = event.target.closest('.todo-worked__task');
+        parentElement.remove();
+        
+    }
 });
