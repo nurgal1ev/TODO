@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <title>Todo App</title>
+</head>
+<body>
+    <div class="container">
+        <div class="todo-app">
+            <div class="todo-header">
+                <h1 class="todo-header__title">TODO</h1>
+                <p class="todo-header__subtitle">All tasks</p>
+            </div>
+
+            <form class="todo-app__input" id="addInput">
+                <input class="todo-input" type="text" id="text-input" placeholder="Add task">
+                <button class="input-button" id="buttonAdd"><img src="icons/Check.svg" alt="" srcset=""></button>
+            </form>
+
+            
+            <div class="todo-worked">
+                <p class="todo-worked__title">At work<p>
+                <div class="todo-tasks__container" id="taskContainer">
+                </div>
+            </div>
+
+            <div class="todo-worked ">
+                <p class="todo-worked__title">Done<p>
+                <div class="todo-worked__task">
+                    <h2 class="task-name done">Task name</h2>
+                        <button class="input-button delete" id="buttonDeleteDone"><img src="icons/delete.svg" alt="" srcset=""></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
