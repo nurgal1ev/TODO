@@ -115,6 +115,10 @@ input:focus {
     text-decoration: line-through;
 }
 
-.check {
+.deleteTask {
+    pointer-events: none;
+}
+
+.doneTask {
     pointer-events: none;
 }
