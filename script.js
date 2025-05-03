@@ -42,6 +42,13 @@ taskContainer.addEventListener('click', function (event) {
     
         taskDoneContainer.insertAdjacentHTML('beforeend', taskAtDone);
         taskElement.remove();
-    };
+    } 
+});
+
+taskDoneContainer.addEventListener('click', function(event) {
+    if (event.target.id == 'buttonDeleteDone' || 
+        event.target.parentElement.id == 'buttonDeleteDone') {
+        event.target.closest('.todo-worked__task').remove();
+    }
 });
 
