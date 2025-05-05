@@ -123,3 +123,7 @@ input:focus {
 .doneTask {
     pointer-events: none;
 }
+
+.filtering {
+    margin-top: 10px;
+}
