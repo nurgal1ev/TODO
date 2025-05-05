@@ -42,6 +42,7 @@ function addTask(event) {
     };
 
     tasksArray.push(newTask);
+    saveToLS();
 
     const cssClass = newTask.done ? "task-name done" : "task-name";
 
@@ -55,7 +56,6 @@ function addTask(event) {
                     </div>`;
     
     taskContainer.insertAdjacentHTML('beforeend', taskAtWork)
-    saveToLS();
 
     textInput.value = '';
     textInput.focus();
@@ -67,13 +67,17 @@ function deleteTask(event) {
     const parentElement = event.target.closest('.todo-worked__task');
 
     const parentElementID = Number(parentElement.id);
-    const index = tasksArray.findIndex(function (task) {
-        return task.id === parentElementID
+
+    tasksArray = tasksArray.filter(function (task) {
+        if (task.id === parentElementID) {
+            return false
+        } else {
+            return true
+        }
     })
     
-    tasksArray.splice(index, 1)
+    saveToLS();
     
-
     parentElement.remove();
 };
 
@@ -101,4 +105,4 @@ function deleteDone(event) {
 
 function saveToLS() {
     localStorage.setItem('tasks', JSON.stringify(tasksArray));
-}
+};
