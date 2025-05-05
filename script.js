@@ -30,8 +30,10 @@ tasksArray.forEach(function (task) {
 });
 
 function addTask(event) {
-    if (textInput.value === '') return;
-    event.preventDefault();
+    if (textInput.value === '') {
+        event.preventDefault();
+        return
+    };
 
     const taskInput = textInput.value;
     
