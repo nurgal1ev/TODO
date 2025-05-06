@@ -29,9 +29,25 @@ tasksArray.forEach(function (task) {
     taskContainer.insertAdjacentHTML('beforeend', taskAtWork)
 });
 
+let doneTasksArray = [];
+
+if (localStorage.getItem('doneTasks')) {
+    doneTasksArray = JSON.parse(localStorage.getItem('doneTasks'));
+}
+
+doneTasksArray.forEach(function (task) {
+    const taskAtDone = 
+        `<div id=${task.id} class="todo-worked__task">
+            <h2 class="task-name done">${task.text}</h2>
+            <button class="input-button delete" id="buttonDeleteDone"><img src="icons/delete.svg" alt="" srcset=""></button>
+        </div>`;
+    
+    taskDoneContainer.insertAdjacentHTML('beforeend', taskAtDone);
+});
+
 function addTask(event) {
+    event.preventDefault();
     if (textInput.value === '') {
-        event.preventDefault();
         return
     };
 
@@ -86,25 +102,42 @@ function deleteTask(event) {
 function doneTask(event) {
     if (event.target.dataset.action == 'done') {
         const taskElement = event.target.closest('.todo-worked__task');
-        const taskName = taskElement.querySelector('.task-name').textContent;
-        const taskAtDone = `
-            <div class="todo-worked__task">
-                <h2 class="task-name done">${taskName}</h2>
+        const taskID = Number(taskElement.id);
+        const taskObj = tasksArray.find(task => task.id === taskID);
+
+        if (!taskObj) return;
+
+        taskObj.done = true;
+        doneTasksArray.push(taskObj);
+        tasksArray = tasksArray.filter(task => task.id !== taskID);
+
+        saveToLS();
+
+        const taskAtDone = 
+            `<div id=${taskObj.id} class="todo-worked__task">
+                <h2 class="task-name done">${taskObj.text}</h2>
                 <button class="input-button delete" id="buttonDeleteDone"><img src="icons/delete.svg" alt="" srcset=""></button>
             </div>`;
-    
+
         taskDoneContainer.insertAdjacentHTML('beforeend', taskAtDone);
         taskElement.remove();
     };
-};
+}
 
 function deleteDone(event) {
     if (event.target.id == 'buttonDeleteDone' || 
         event.target.parentElement.id == 'buttonDeleteDone') {
-        event.target.closest('.todo-worked__task').remove();
+        const doneTaskElement = event.target.closest('.todo-worked__task');
+        const doneTaskID = Number(doneTaskElement.id);
+
+        doneTasksArray = doneTasksArray.filter(task => task.id !== doneTaskID);
+        saveToLS();
+        
+        doneTaskElement.remove();
     };
-};
+}
 
 function saveToLS() {
     localStorage.setItem('tasks', JSON.stringify(tasksArray));
-};
+    localStorage.setItem('doneTasks', JSON.stringify(doneTasksArray));
+}
